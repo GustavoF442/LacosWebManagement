@@ -1,14 +1,17 @@
+import { cookies } from "next/headers";
 import { createClient } from "@/lib/supabase/server";
 import { Sidebar } from "@/components/admin/sidebar";
 import { Header } from "@/components/admin/header";
-
-export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Chamar cookies() fora do try/catch garante que Next.js
+  // marque esta rota como dinâmica (nunca pré-renderizada)
+  cookies();
+
   try {
     const supabase = createClient();
 
