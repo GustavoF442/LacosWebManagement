@@ -35,10 +35,9 @@ export function ConteudoForm({ conteudo }: ConteudoFormProps) {
     descricao: conteudo?.descricao || "",
     fase_da_vida: conteudo?.fase_da_vida || "",
     o_que_e_normal: conteudo?.o_que_e_normal || "",
-    sinais_de_alerta: conteudo?.sinais_de_alerta || "",
+    sinais_alerta: conteudo?.sinais_alerta || "",
     quando_procurar_ubs: conteudo?.quando_procurar_ubs || "",
     o_que_fazer_em_casa: conteudo?.o_que_fazer_em_casa || "",
-    publicado: conteudo?.publicado ?? false,
   });
 
   const handleChange = (
@@ -56,7 +55,7 @@ export function ConteudoForm({ conteudo }: ConteudoFormProps) {
       if (isEditing) {
         await supabase
           .from("conteudos")
-          .update({ ...formData, updated_at: new Date().toISOString() })
+          .update(formData)
           .eq("id", conteudo.id);
       } else {
         await supabase.from("conteudos").insert(formData);
@@ -81,15 +80,6 @@ export function ConteudoForm({ conteudo }: ConteudoFormProps) {
         </Link>
         <div className="flex-1" />
         <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 text-sm font-body">
-            <input
-              type="checkbox"
-              checked={formData.publicado}
-              onChange={(e) => handleChange("publicado", e.target.checked)}
-              className="h-4 w-4 rounded border-input accent-primary"
-            />
-            Publicado
-          </label>
           <Button type="submit" disabled={loading}>
             {loading ? (
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -183,11 +173,11 @@ export function ConteudoForm({ conteudo }: ConteudoFormProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="sinais_de_alerta">Sinais de alerta</Label>
+                <Label htmlFor="sinais_alerta">Sinais de alerta</Label>
                 <Textarea
-                  id="sinais_de_alerta"
-                  value={formData.sinais_de_alerta}
-                  onChange={(e) => handleChange("sinais_de_alerta", e.target.value)}
+                  id="sinais_alerta"
+                  value={formData.sinais_alerta}
+                  onChange={(e) => handleChange("sinais_alerta", e.target.value)}
                   placeholder="Quais sinais merecem atenção..."
                   rows={3}
                 />

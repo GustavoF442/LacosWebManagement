@@ -2,10 +2,11 @@ export interface Usuaria {
   id: string;
   nome: string;
   email: string;
-  data_nascimento: string | null;
+  idade: number | null;
   fase_da_vida: string | null;
   is_admin: boolean;
   created_at: string;
+  updated_at: string;
 }
 
 export interface Conteudo {
@@ -15,38 +16,37 @@ export interface Conteudo {
   descricao: string;
   fase_da_vida: string;
   o_que_e_normal: string;
-  sinais_de_alerta: string;
+  sinais_alerta: string;
   quando_procurar_ubs: string;
   o_que_fazer_em_casa: string;
-  publicado: boolean;
   created_at: string;
-  updated_at: string;
 }
 
 export interface CicloMenstrual {
   id: string;
-  usuaria_id: string;
+  usuario_id: string;
   data_inicio: string;
   data_fim: string | null;
-  duracao: number | null;
+  intensidade: string | null;
+  observacoes: string | null;
   created_at: string;
 }
 
 export interface Sintoma {
   id: string;
-  usuaria_id: string;
+  usuario_id: string;
   tipo: string;
-  intensidade: number;
+  intensidade: string | null;
   data: string;
+  descricao: string | null;
   created_at: string;
 }
 
 export interface Lembrete {
   id: string;
-  usuaria_id: string;
-  titulo: string;
-  descricao: string;
-  data_hora: string;
+  usuario_id: string;
+  tipo: string;
+  data: string;
   ativo: boolean;
   created_at: string;
 }

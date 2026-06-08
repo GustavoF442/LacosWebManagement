@@ -27,7 +27,7 @@ export default function UsuariasPage() {
     setLoading(true);
     let query = supabase
       .from("usuarias")
-      .select("id, nome, email, data_nascimento, fase_da_vida, is_admin, created_at")
+      .select("id, nome, email, idade, fase_da_vida, is_admin, created_at, updated_at")
       .order("created_at", { ascending: false });
 
     if (search) {
@@ -53,14 +53,9 @@ export default function UsuariasPage() {
     return new Date(dateStr).toLocaleDateString("pt-BR");
   };
 
-  const calcAge = (dateStr: string | null) => {
-    if (!dateStr) return "—";
-    const birth = new Date(dateStr);
-    const today = new Date();
-    let age = today.getFullYear() - birth.getFullYear();
-    const m = today.getMonth() - birth.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
-    return `${age} anos`;
+  const formatAge = (idade: number | null) => {
+    if (!idade) return "—";
+    return `${idade} anos`;
   };
 
   return (
@@ -128,7 +123,7 @@ export default function UsuariasPage() {
                     {usuaria.email}
                   </TableCell>
                   <TableCell className="font-body">
-                    {calcAge(usuaria.data_nascimento)}
+                    {formatAge(usuaria.idade)}
                   </TableCell>
                   <TableCell>
                     {usuaria.fase_da_vida ? (

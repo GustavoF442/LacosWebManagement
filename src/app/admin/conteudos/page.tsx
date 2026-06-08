@@ -131,20 +131,19 @@ export default function ConteudosPage() {
               <TableHead>Título</TableHead>
               <TableHead>Categoria</TableHead>
               <TableHead>Fase da Vida</TableHead>
-              <TableHead>Status</TableHead>
               <TableHead className="text-right">Ações</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {loading ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-8">
+                <TableCell colSpan={4} className="text-center py-8">
                   <p className="text-muted-foreground font-body">Carregando...</p>
                 </TableCell>
               </TableRow>
             ) : conteudos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="text-center py-8">
+                <TableCell colSpan={4} className="text-center py-8">
                   <p className="text-muted-foreground font-body">
                     Nenhum conteúdo encontrado.
                   </p>
@@ -160,12 +159,7 @@ export default function ConteudosPage() {
                     <Badge variant="secondary">{conteudo.categoria}</Badge>
                   </TableCell>
                   <TableCell className="font-body">
-                    {conteudo.fase_da_vida}
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={conteudo.publicado ? "success" : "warning"}>
-                      {conteudo.publicado ? "Publicado" : "Rascunho"}
-                    </Badge>
+                    {conteudo.fase_da_vida || "—"}
                   </TableCell>
                   <TableCell className="text-right">
                     <div className="flex justify-end gap-2">

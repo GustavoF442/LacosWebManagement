@@ -35,10 +35,10 @@ export default function RelatoriosPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      // Faixa etária
+      // Faixa etária (usando campo 'idade' inteiro)
       const { data: usuarios } = await supabase
         .from("usuarias")
-        .select("data_nascimento");
+        .select("idade");
 
       if (usuarios) {
         const faixas: Record<string, number> = {
@@ -51,16 +51,12 @@ export default function RelatoriosPage() {
           "N/I": 0,
         };
 
-        usuarios.forEach((u: { data_nascimento: string | null }) => {
-          if (!u.data_nascimento) {
+        usuarios.forEach((u: { idade: number | null }) => {
+          if (!u.idade) {
             faixas["N/I"]++;
             return;
           }
-          const birth = new Date(u.data_nascimento);
-          const today = new Date();
-          let age = today.getFullYear() - birth.getFullYear();
-          const m = today.getMonth() - birth.getMonth();
-          if (m < 0 || (m === 0 && today.getDate() < birth.getDate())) age--;
+          const age = u.idade;
 
           if (age < 15) faixas["10-14"]++;
           else if (age < 20) faixas["15-19"]++;
