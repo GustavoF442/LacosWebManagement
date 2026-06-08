@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FileText,
-  Globe,
   Users,
   BarChart3,
   LogOut,
@@ -26,11 +25,6 @@ const menuItems = [
     label: "Conteúdos",
     href: "/admin/conteudos",
     icon: FileText,
-  },
-  {
-    label: "Gerenciar Site",
-    href: "/admin/site",
-    icon: Globe,
   },
   {
     label: "Usuárias",
